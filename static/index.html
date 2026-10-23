@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airsoft Hub | A Legjobb Ajánlatok</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Homályos színes foltok a háttérben -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <div class="container">
+        <header class="glass-header">
+            <h1>Airsoft Hub</h1>
+            <p>Airsoftguru • Airsoftplaza • Taiwangun • Gunfire • Catus • Airsoftpro • Combatzone • Anareus</p>
+        </header>
+
+        <main>
+            <section class="category-section">
+                <h2>⭐ Legnépszerűbb Termékek</h2>
+                <div class="product-grid" id="popular-container">
+                    <!-- JS tölti be az adatokat -->
+                    <div class="loading">Adatok betöltése...</div>
+                </div>
+            </section>
+
+            <section class="category-section">
+                <h2>🔥 Éppen Akciós Termékek</h2>
+                <div class="product-grid" id="sale-container"></div>
+            </section>
+
+            <section class="category-section">
+                <h2>🎯 Kezdő Fegyverek és Szettek</h2>
+                <div class="product-grid" id="beginner-container"></div>
+            </section>
+            
+            <section class="category-section">
+                <h2>🔫 Pisztolyok és Karabélyok</h2>
+                <div class="product-grid" id="weapons-container"></div>
+            </section>
+
+            <section class="category-section">
+                <h2>🛠️ AAP-01 Kiegészítők</h2>
+                <div class="product-grid" id="aap-container"></div>
+            </section>
+
+            <section class="category-section">
+                <h2>🪖 Ruházat és Felszerelés</h2>
+                <div class="product-grid" id="clothing-container"></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Hivatkozás a scriptre -->
+    <script src="script.js"></script>
+</body>
+</html>
