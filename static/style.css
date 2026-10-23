@@ -218,3 +218,42 @@ body {
     font-weight: 600;
     font-size: 0.9rem;
 }
+/* Fejléc navigáció */
+.top-nav {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.top-nav a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.05);
+    transition: background 0.3s, color 0.3s;
+    font-size: 0.95rem;
+}
+
+.top-nav a:hover {
+    background: var(--accent);
+    color: white;
+}
+
+body.dark-mode .top-nav a {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .top-nav a:hover {
+    background: var(--accent);
+    color: white;
+}
+
+/* Görgetés finomítása */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 2rem; /* Hogy a horgony linkek ne csússzanak be a képernyő teteje alá */
+}
