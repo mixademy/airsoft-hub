@@ -2,27 +2,26 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch('/api/products')
         .then(response => response.json())
         .then(data => {
-            if(data.error) {
-                console.error("Hiba:", data.error);
-                return;
-            }
-            // Itt rendereljük ki a kártyákat a kapott "data" alapján
-            renderProducts('popular-container', data.legnepszerubb);
-            renderProducts('sale-container', data.akcios);
-            // ... stb
+            renderProducts('legnepszerubb-container', data.legnepszerubb);
+            renderProducts('akcios-container', data.akcios);
+            // Ha a többi kategóriát is beleteszed az index.html-be, ide írd be azokat is!
         })
-        .catch(err => console.error("Nem sikerült betölteni az adatokat:", err));
+        .catch(err => console.error("Hiba az adatok betöltésekor:", err));
 });
 
 function renderProducts(containerId, products) {
     const container = document.getElementById(containerId);
-    if(!container || !products) return;
+    if(!container) return;
     
+    if(!products || products.length === 0) {
+        container.innerHTML = '<p style="color: #475569;">Jelenleg nincs elérhető termék ebben a kategóriában.</p>';
+        return;
+    }
+
     container.innerHTML = products.map(p => `
         <div class="glass-card">
             <div class="img-container">
-                <!-- A hivatkozás most már tuti jó lesz, mert a backend egyben küldi -->
-                <img src="${p.image}" alt="${p.name}" onerror="this.src='helyettesito-kep.jpg'">
+                <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/300x200?text=Nincs+kép'">
             </div>
             <div class="card-info">
                 <h3>${p.name}</h3>
