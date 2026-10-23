@@ -21,7 +21,7 @@ def get_products():
         return jsonify({"error": "Adatok még nem lettek letöltve"}), 404
 
 # Ezt a végpontot hívja meg a Render Cron Job minden reggel 6:00-kor
-@app.route('/api/cron-update', methods=['POST'])
+@app.route('/api/cron-update', methods=['GET', 'POST'])
 def cron_update():
     # Biztonsági kulcs, hogy csak te/a render tudja elindítani
     secret = request.args.get('secret')
