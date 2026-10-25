@@ -3,61 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Airsoft Hub | A Legjobb Ajánlatok</title>
+    <title>Airsoft Hub | A Felszerelésed Itt Kezdődik</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <button id="theme-toggle" class="theme-btn">🌙 Sötét mód</button>
-
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
     <div class="blob blob-3"></div>
 
+    <div id="auth-modal" class="modal-overlay hidden">
+        <div class="modal-content glass-card">
+            <button id="close-modal" class="close-btn">✖</button>
+            <h2>Bejelentkezés</h2>
+            <p>Jelentkezz be a termékek mentéséhez!</p>
+            <input type="text" id="username-input" placeholder="Felhasználónév" class="auth-input">
+            <button id="login-submit" class="btn btn-large" style="width:100%; margin-top:1rem;">Belépés / Regisztráció</button>
+        </div>
+    </div>
+
+    <nav class="main-nav">
+        <div class="nav-logo">AIRSOFT<span>HUB</span></div>
+        
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Keresés a webshopokban (pl. Glock, AAP)...">
+        </div>
+
+        <div class="nav-links">
+            <a href="#akcios-sec">Akciók</a>
+            <a href="#legnepszerubb-sec">Legnépszerűbb</a>
+            <a href="#kezdo-sec">Kezdőknek</a>
+            
+            <button id="auth-btn" class="btn outline-btn">Bejelentkezés</button>
+            <span id="user-greeting" class="hidden" style="font-weight:bold; color:var(--accent);"></span>
+            <button id="logout-btn" class="btn outline-btn hidden">Kilépés</button>
+            <button id="theme-toggle" class="theme-icon">☀️</button>
+        </div>
+    </nav>
+
     <div class="container">
-        <header class="glass-header">
-            <h1>Airsoft Hub</h1>
-            <nav class="top-nav">
-                <a href="#legnepszerubb-sec">Legnépszerűbb</a>
-                <a href="#akcios-sec">Akciós</a>
-                <a href="#kezdo-sec">Kezdő szettek</a>
-                <a href="#fegyverek-sec">Fegyverek</a>
-                <a href="#aap01-sec">AAP-01</a>
-                <a href="#ruhazat-sec">Ruházat</a>
-            </nav>
+        <header class="hero-section">
+            <h1>A Felszerelésed Itt Kezdődik</h1>
+            <p>Valós idejű válogatás a legnagyobb európai webáruházakból.<br>Taiwangun, Gunfire, Airsoftplaza és sok más egy helyen.</p>
         </header>
 
         <main>
+            <section id="search-results-sec" class="category-section hidden">
+                <h2>🔎 Keresési Találatok</h2>
+                <div class="product-grid" id="search-results-container"></div>
+            </section>
+
+            <section id="saved-sec" class="category-section hidden">
+                <h2>❤️ Mentett Termékeim</h2>
+                <div class="product-grid" id="saved-container"></div>
+            </section>
+
+            <section id="akcios-sec" class="category-section">
+                <h2>🔥 Éppen Akciós Termékek</h2>
+                <div class="coming-soon">
+                    <h3>Coming soon...</h3>
+                    <p>Hamarosan itt találod a legnagyobb leárazásokat!</p>
+                </div>
+            </section>
+
             <section id="legnepszerubb-sec" class="category-section">
                 <h2>⭐ Legnépszerűbb Termékek</h2>
                 <div class="product-grid" id="legnepszerubb-container"></div>
             </section>
 
-            <section id="akcios-sec" class="category-section">
-                <h2>🔥 Éppen Akciós Termékek</h2>
-                <div class="product-grid" id="akcios-container"></div>
-            </section>
-
             <section id="kezdo-sec" class="category-section">
-                <h2>🎯 Kezdő Fegyverek és Szettek</h2>
+                <h2>🎯 Kezdő Fegyverek</h2>
                 <div class="product-grid" id="kezdo-container"></div>
             </section>
             
-            <section id="fegyverek-sec" class="category-section">
-                <h2>🔫 Pisztolyok és Karabélyok</h2>
-                <div class="product-grid" id="fegyverek-container"></div>
+            <section id="pisztoly-sec" class="category-section">
+                <h2>🔫 Pisztolyok</h2>
+                <div class="product-grid" id="pisztoly-container"></div>
+            </section>
+
+            <section id="karabely-sec" class="category-section">
+                <h2>⚔️ Karabélyok</h2>
+                <div class="product-grid" id="karabely-container"></div>
             </section>
 
             <section id="aap01-sec" class="category-section">
-                <h2>🛠️ AAP-01 Kiegészítők</h2>
+                <h2>🛠️ AAP-01 és Alkatrészek</h2>
                 <div class="product-grid" id="aap01-container"></div>
             </section>
 
-            <section id="ruhazat-sec" class="category-section">
-                <h2>🪖 Ruházat és Felszerelés</h2>
-                <div class="product-grid" id="ruhazat-container"></div>
+            <section id="taktikai-sec" class="category-section">
+                <h2>🪖 Taktikai Felszerelés</h2>
+                <div class="product-grid" id="taktikai-container"></div>
+            </section>
+
+            <section id="kiegeszito-sec" class="category-section">
+                <h2>🔦 Kiegészítők</h2>
+                <div class="product-grid" id="kiegeszito-container"></div>
             </section>
         </main>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>

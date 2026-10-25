@@ -6,107 +6,34 @@ def run_scraper():
     
     scraped_data = {
         "legnepszerubb": [
-            {
-                "name": "BLS 0.25g BB (1kg)",
-                "shop": "AIRSOFTGURU",
-                "price": "4 500 Ft",
-                "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Airsoft_pellets_0.20g.jpg/320px-Airsoft_pellets_0.20g.jpg", 
-                "url": "https://airsoftguru.hu/bls-025g-bb-1kg"
-            },
-            {
-                "name": "Odin Innovations M1 Speedloader",
-                "shop": "AIRSOFTPRO",
-                "price": "18 000 Ft",
-                "image": "https://placehold.co/300x200/png?text=Odin+M1", 
-                "url": "https://airsoftpro.cz/hu/odin-m1-speedloader"
-            },
-            {
-                "name": "Stalker Rácsos Maszk V2",
-                "shop": "CATUS",
-                "price": "3 200 Ft",
-                "image": "https://placehold.co/300x200/png?text=Stalker+Mask", 
-                "url": "https://catus.hu/stalker-v2-maszk"
-            }
-        ],
-        "akcios": [
-            {
-                "name": "Specna Arms CORE SA-C01",
-                "shop": "TAIWANGUN",
-                "price": "39 990 Ft",
-                "image": "https://placehold.co/300x200/png?text=SA-C01", 
-                "url": "https://www.taiwangun.com/hu/sa-c01-core"
-            },
-            {
-                "name": "Bolle X800 Védőszemüveg",
-                "shop": "GUNFIRE",
-                "price": "14 500 Ft",
-                "image": "https://placehold.co/300x200/png?text=Bolle+X800", 
-                "url": "https://gunfire.com/hu/bolle-x800"
-            }
+            { "name": "BLS 0.25g BB (1kg)", "shop": "TAIWANGUN", "price": "Ismeretlen ár", "url": "https://www.taiwangun.com/025g-bbs-6mm/precision-bb-pellets-0-25g-1-kg-bls", "image": "https://placehold.co/300x200/2a2d3e/ffffff?text=BLS+0.25g" },
+            { "name": "ProTech Green Gas 1000ml", "shop": "TAIWANGUN", "price": "Ismeretlen ár", "url": "https://www.taiwangun.com/green-gas/airsoft-green-gas-1000ml-pro-tech-guns", "image": "https://placehold.co/300x200/2a2d3e/ffffff?text=ProTech+Gas" },
+            { "name": "VB Li-Po 1200mAh 7.4V", "shop": "TAIWANGUN", "price": "Ismeretlen ár", "url": "https://www.taiwangun.com/lipo-7-4v/battery-li-po-1200mah-7-4v-20-40c-t-connector-vb", "image": "https://placehold.co/300x200/2a2d3e/ffffff?text=Li-Po+Aksi" },
+            { "name": "GHK 12g CO2 Patron (10db)", "shop": "AIRSOFTPLAZA", "price": "Ismeretlen ár", "url": "https://airsoftplaza.hu/termek/ghk-12g-co2-patron-10db/", "image": "https://placehold.co/300x200/2a2d3e/ffffff?text=CO2+Patron" }
         ],
         "kezdo": [
-            {
-                "name": "Cyma CM.028 AK47",
-                "shop": "GUNFIRE",
-                "price": "35 000 Ft",
-                "image": "https://placehold.co/300x200/png?text=AK47", 
-                "url": "https://gunfire.com/hu/cm028-ak47"
-            },
-            {
-                "name": "JG G608 G36C",
-                "shop": "TAIWANGUN",
-                "price": "38 500 Ft",
-                "image": "https://placehold.co/300x200/png?text=G36C", 
-                "url": "https://www.taiwangun.com/hu/jg-g608-g36c"
-            }
+            { "name": "Double Eagle M904G ETU", "shop": "TAIWANGUN", "price": "Ismeretlen ár", "url": "https://www.taiwangun.com/assault-rifle-aeg/m904g-falcon-3-0-etu-airsoft-rifle-tan-double-eagle", "image": "https://placehold.co/300x200/2a2d3e/ffffff?text=DE+M904G" },
+            { "name": "Double Eagle UTR45", "shop": "AIRSOFTPLAZA", "price": "Ismeretlen ár", "url": "https://airsoftplaza.hu/termek/double-eagle-m917g-utr45-fekete/", "image": "https://placehold.co/300x200/2a2d3e/ffffff?text=UTR45" }
         ],
-        "fegyverek": [
-            {
-                "name": "Golden Eagle 1911 GBB",
-                "shop": "COMBATZONE",
-                "price": "32 000 Ft",
-                "image": "https://placehold.co/300x200/png?text=1911+GBB", 
-                "url": "https://www.combatzone.hu/golden-eagle-1911"
-            },
-            {
-                "name": "Cyma CM.041G Upgraded",
-                "shop": "TAIWANGUN",
-                "price": "85 000 Ft",
-                "image": "https://placehold.co/300x200/png?text=CM041G", 
-                "url": "https://www.taiwangun.com/hu/cm041g-upgraded"
-            }
+        "pisztoly": [
+            { "name": "E&C Glock 17 Gen.4", "shop": "AIRSOFTPLAZA", "price": "Ismeretlen ár", "url": "https://airsoftplaza.hu/termek/ec-glock-17-gen-4-green-gaz-gbb-fekete-ec-1106/", "image": "https://placehold.co/300x200/2a2d3e/ffffff?text=Glock+17" },
+            { "name": "AAP-01 Assassin", "shop": "AIRSOFTPRO", "price": "Ismeretlen ár", "url": "https://airsoftpro.hu/hu/airsoft-fegyverek/airsoft-pisztolyok/airsoftova-pistole-aap-01-assassin-gbb-cerny-detail", "image": "https://placehold.co/300x200/2a2d3e/ffffff?text=AAP-01" }
+        ],
+        "karabely": [
+            { "name": "EMG FN SCAR-H ETU", "shop": "TAIWANGUN", "price": "Ismeretlen ár", "url": "https://www.taiwangun.com/assault-rifle-aeg/licensed-fn-scar-h-cm-063h-replica-with-eshooter-etu-gen-2-tan-emg", "image": "https://placehold.co/300x200/2a2d3e/ffffff?text=FN+SCAR-H" },
+            { "name": "Novritsch SSQ4 HPA", "shop": "AIRSOFTPLAZA", "price": "Ismeretlen ár", "url": "https://airsoftplaza.hu/termek/novritsch-ssq4-hpa/", "image": "https://placehold.co/300x200/2a2d3e/ffffff?text=Novritsch" }
         ],
         "aap01": [
-            {
-                "name": "Action Army AAP-01 Assassin",
-                "shop": "AIRSOFTPLAZA",
-                "price": "38 900 Ft",
-                "image": "https://placehold.co/300x200/png?text=AAP-01", 
-                "url": "https://airsoftplaza.hu/action-army-aap-01"
-            },
-            {
-                "name": "CNC Alu Elsütőbillentyű AAP-01",
-                "shop": "ANAREUS",
-                "price": "8 500 Ft",
-                "image": "https://placehold.co/300x200/png?text=CNC+Trigger", 
-                "url": "https://www.anareus.cz/hu/cnc-trigger-aap01"
-            }
+            { "name": "Action Army AAP-01 (Fekete)", "shop": "AIRSOFTGURU", "price": "Ismeretlen ár", "url": "https://airsoftguru.hu/aap-01-kiegeszitok-alkatreszek/2907-action-army-aap-01-fekete.html", "image": "https://placehold.co/300x200/2a2d3e/ffffff?text=AAP-01" },
+            { "name": "CTM CNC Bolt Tűzváltóval", "shop": "AIRSOFTGURU", "price": "Ismeretlen ár", "url": "https://airsoftguru.hu/aap-01-kiegeszitok-alkatreszek/2671-cnc_aap_01_bolt_tuzvaltoval_black_ctm.html", "image": "https://placehold.co/300x200/2a2d3e/ffffff?text=CNC+Bolt" }
         ],
-        "ruhazat": [
-            {
-                "name": "Multicam FAST PJ Sisak",
-                "shop": "CATUS",
-                "price": "12 500 Ft",
-                "image": "https://placehold.co/300x200/png?text=FAST+Helmet", 
-                "url": "https://catus.hu/fast-pj-sisak-multicam"
-            },
-            {
-                "name": "Mechanix M-Pact Kesztyű",
-                "shop": "AIRSOFTPRO",
-                "price": "11 000 Ft",
-                "image": "https://placehold.co/300x200/png?text=M-Pact", 
-                "url": "https://airsoftpro.cz/hu/mechanix-mpact"
-            }
+        "taktikai": [
+            { "name": "Pyramex V2G-Plus", "shop": "AIRSOFTPLAZA", "price": "Ismeretlen ár", "url": "https://airsoftplaza.hu/termek/pyramex-v2g-plus-antifog-vedoszemuveg-viztiszta/", "image": "https://placehold.co/300x200/2a2d3e/ffffff?text=V2G-Plus" },
+            { "name": "FAST MH Sisak", "shop": "TAIWANGUN", "price": "Ismeretlen ár", "url": "https://www.taiwangun.com/tactical-helmet/fast-mh-helmet-replica-with-quick-adjustment-black-em", "image": "https://placehold.co/300x200/2a2d3e/ffffff?text=FAST+MH" }
+        ],
+        "kiegeszito": [
+            { "name": "T-Eagle Mod.VI Red Dot", "shop": "TAIWANGUN", "price": "Ismeretlen ár", "url": "https://www.taiwangun.com/red-dot-sights/weapon-sight-mod-vi-t-eagle", "image": "https://placehold.co/300x200/2a2d3e/ffffff?text=Red+Dot" },
+            { "name": "Acetech Blaster C Tracer", "shop": "ANAREUS", "price": "Ismeretlen ár", "url": "https://www.anareus.cz/gb/tracer-units-for-airsoft-guns/16123-acetech-blaster-c-tracer-unit-with-muzzle-flame-black.html", "image": "https://placehold.co/300x200/2a2d3e/ffffff?text=Tracer" }
         ]
     }
 
