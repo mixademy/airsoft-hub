@@ -11,6 +11,34 @@
     <div class="blob blob-2"></div>
     <div class="blob blob-3"></div>
 
+    <!-- 1. Felszerelés Építő (Builder) Modál -->
+    <div id="builder-modal" class="modal-overlay hidden">
+        <div class="modal-content builder-content glass-card">
+            <button id="close-builder" class="close-btn">✖</button>
+            <h2 style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 1rem;">🛠️ Felszerelés Építő</h2>
+            
+            <div class="builder-list">
+                <!-- Ezt a JS tölti fel a kategóriákkal (Elsődleges, Másodlagos, stb.) -->
+            </div>
+            
+            <div style="margin-top: 2rem; text-align: right;">
+                <button class="btn btn-large" onclick="alert('Felszerelés sikeresen mentve! (Fejlesztés alatt)')">Felszerelés Mentése</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Termékválasztó Al-modál az Építőhöz -->
+    <div id="picker-modal" class="modal-overlay hidden" style="z-index: 1001;">
+        <div class="modal-content picker-content glass-card">
+            <button id="close-picker" class="close-btn">✖</button>
+            <h3 id="picker-title" style="margin-bottom: 1rem;">Válassz terméket</h3>
+            <div class="picker-grid" id="picker-grid">
+                <!-- Ide kerülnek a választható termékek kártyái -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigáció -->
     <nav class="main-nav">
         <div class="nav-logo">AIRSOFT<span>HUB</span></div>
         
@@ -18,7 +46,10 @@
             <input type="text" id="search-input" placeholder="Keresés a webshopokban...">
         </div>
 
-        <div class="nav-links">
+        <!-- Mobil Menü Gomb -->
+        <button id="mobile-menu-toggle" class="mobile-only theme-icon">☰</button>
+
+        <div class="nav-links" id="nav-links">
             <a href="#akcios-sec">Akciók</a>
             <a href="#legnepszerubb-sec">Legnépszerűbb</a>
             <a href="#kezdo-sec">Kezdőknek</a>
@@ -27,7 +58,11 @@
             <a href="#aap01-sec">AAP-01</a>
             <a href="#taktikai-sec">Taktikai</a>
             <a href="#kiegeszito-sec">Kiegészítők</a>
-            <button id="theme-toggle" class="theme-icon">☀️</button>
+        </div>
+
+        <div class="nav-icons">
+            <button id="builder-toggle" class="theme-icon" title="Felszerelés Építő">🔨</button>
+            <button id="theme-toggle" class="theme-icon" title="Téma váltás">☀️</button>
         </div>
     </nav>
 
