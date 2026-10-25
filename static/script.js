@@ -44,7 +44,7 @@ const staticData = {
         { name: "T-Eagle Mod.VI Red Dot", shop: "TAIWANGUN", price: "34.68 EUR", url: "https://www.taiwangun.com/red-dot-sights/weapon-sight-mod-vi-t-eagle", image: "img/kolimatory-celownik-kolimatorowy-mod-vi-t-eagle-3395603(1-1).jpg" },
         { name: "WADSN V600 Lámpa", shop: "TAIWANGUN", price: "33.21 EUR", url: "https://www.taiwangun.com/lights-lasers/tactical-flashlight-v600-black-wadsn", image: "img/latarki-taktyczna-latarka-v600-black-wadsn-1849851(10-1).jpg" },
         { name: "Acetech Blaster C Tracer", shop: "ANAREUS", price: "52.86 EUR", url: "https://www.anareus.cz/gb/tracer-units-for-airsoft-guns/16123-acetech-blaster-c-tracer-unit-with-muzzle-flame-black.html", image: "img/55726-thickbox_default.webp" },
-        { name: "Lézer Szerelék AP-8", shop: "AIRSOFTPLAZA", price: "4000 Ft", url: "https://airsoftplaza.hu/termek/lezer-szerelekre-ap-8/", image: "img/lezer-szerelekre-ap-8-lezerek-506.webp" },
+        { name: "Lézeres Célmegjelölő AP-8", shop: "AIRSOFTPLAZA", price: "4000 Ft", url: "https://airsoftplaza.hu/termek/lezer-szerelekre-ap-8/", image: "img/lezer-szerelekre-ap-8-lezerek-506.webp" },
         { name: "AFG2 Angled Markolat", shop: "AIRSOFTPLAZA", price: "3100 Ft", url: "https://airsoftplaza.hu/termek/afg2-angled-markolat-fekete/", image: "img/1694-2.webp" }
     ]
 };
