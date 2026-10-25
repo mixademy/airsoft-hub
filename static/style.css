@@ -665,3 +665,64 @@ body.light-mode .search-bar input {
         grid-template-columns: 1fr;
     }
 }
+/* Kereső burkoló és Szűrő gombok */
+.search-wrapper { 
+    display: flex; 
+    align-items: center; 
+    position: relative; 
+    flex-grow: 1; 
+    max-width: 400px; 
+    margin: 0 1rem; 
+}
+.search-bar { max-width: 100%; margin: 0; }
+
+.filter-btn { 
+    background: transparent; 
+    border: 1px solid var(--glass-border); 
+    color: var(--text-main); 
+    padding: 0.5rem 0.8rem; 
+    border-radius: 8px; 
+    margin-left: 0.5rem; 
+    cursor: pointer; 
+    transition: background 0.2s; 
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+.filter-btn:hover { background: rgba(255, 255, 255, 0.1); }
+body.light-mode .filter-btn:hover { background: rgba(0, 0, 0, 0.05); }
+
+/* Felugró Szűrő Panel */
+.filter-panel { 
+    position: absolute; 
+    top: 110%; 
+    right: 0; 
+    background: var(--nav-bg); 
+    backdrop-filter: blur(16px); 
+    border: 1px solid var(--glass-border); 
+    border-radius: 12px; 
+    padding: 1rem; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 0.8rem; 
+    z-index: 200; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    min-width: 200px;
+}
+
+.glass-select { 
+    width: 100%; 
+    padding: 0.5rem; 
+    border-radius: 6px; 
+    border: 1px solid var(--glass-border); 
+    background: rgba(255,255,255,0.05); 
+    color: var(--text-main); 
+    outline: none; 
+    font-size: 0.85rem; 
+}
+.glass-select option { background: var(--bg-color); color: var(--text-main); }
+body.light-mode .glass-select { background: rgba(0,0,0,0.05); }
+body.light-mode .glass-select option { background: #fff; color: #000; }
+
+/* Építő Modálban a kereső */
+.picker-content .search-wrapper { max-width: 100%; margin: 0 0 1.5rem 0; }
+.picker-content .filter-panel { right: auto; left: 0; }

@@ -11,44 +11,83 @@
     <div class="blob blob-2"></div>
     <div class="blob blob-3"></div>
 
-    <!-- 1. Felszerelés Építő Modál -->
+    <!-- Felszerelés Építő Modál -->
     <div id="builder-modal" class="modal-overlay hidden">
         <div class="modal-content builder-content glass-card">
             <button id="close-builder" class="close-btn">✖</button>
             <h2 style="margin-bottom: 1.5rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 1rem;">🛠️ Felszerelés Építő</h2>
-            
-            <div class="builder-list">
-                <!-- JS generálja -->
-            </div>
-            
+            <div class="builder-list"></div>
             <div style="margin-top: 2rem; text-align: right;">
-                <button class="btn btn-large" onclick="alert('Felszerelés sikeresen mentve! (Fejlesztés alatt)')">Felszerelés Mentése</button>
+                <button class="btn btn-large" onclick="alert('Felszerelés mentve!')">Felszerelés Mentése</button>
             </div>
         </div>
     </div>
 
-    <!-- 2. Termékválasztó Al-modál Keresővel -->
+    <!-- Termékválasztó Al-modál API Keresővel és Szűrőkkel -->
     <div id="picker-modal" class="modal-overlay hidden" style="z-index: 1001;">
         <div class="modal-content picker-content glass-card">
             <button id="close-picker" class="close-btn">✖</button>
             <h3 id="picker-title" style="margin-bottom: 1rem;">Válassz terméket</h3>
             
-            <!-- Új keresősáv a választóban -->
-            <div class="search-bar" style="margin: 0 0 1.5rem 0; width: 100%; max-width: 100%;">
-                <input type="text" id="picker-search-input" placeholder="Keresés ebben a kategóriában...">
+            <div class="search-wrapper" style="margin-bottom: 1.5rem; width: 100%; max-width: 100%;">
+                <div class="search-bar" style="margin: 0; flex-grow: 1;">
+                    <input type="text" id="picker-search-input" placeholder="Élő keresés a webshopokban...">
+                </div>
+                <button id="picker-filter-toggle" class="filter-btn">⚙️ Szűrők</button>
+                
+                <div id="picker-filter-panel" class="filter-panel hidden">
+                    <select id="picker-shop-filter" class="glass-select">
+                        <option value="">Minden Webshop</option>
+                        <option value="taiwangun">Taiwangun</option>
+                        <option value="gunfire">Gunfire</option>
+                        <option value="airsoftplaza">Airsoftplaza</option>
+                    </select>
+                    <select id="picker-cat-filter" class="glass-select">
+                        <option value="">Minden Kategória</option>
+                        <option value="rifle">Karabély (Rifle)</option>
+                        <option value="pistol">Pisztoly</option>
+                        <option value="sniper">Mesterlövész</option>
+                        <option value="shotgun">Shotgun</option>
+                        <option value="gear">Felszerelés</option>
+                        <option value="gas">Gáz / Akku</option>
+                    </select>
+                </div>
             </div>
 
-            <div class="picker-grid" id="picker-grid">
-                <!-- JS generálja -->
-            </div>
+            <div class="picker-grid" id="picker-grid"></div>
         </div>
     </div>
 
+    <!-- Fő Navigáció -->
     <nav class="main-nav">
-        <div class="nav-logo">AIRSOFT<span>HUB</span></div>
+        <div class="nav-logo" style="display: flex; align-items: center; gap: 0.5rem;">
+            <img src="img/logo.svg" alt="Logo" style="width: 30px; height: 30px; display: none;" onerror="this.style.display='none'">
+            AIRSOFT<span>HUB</span>
+        </div>
         
-        <div class="search-bar">
-            <input type="text" id="search-input" placeholder="Keresés a webshopokban...">
+        <div class="search-wrapper">
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Keresés a webshopokban...">
+            </div>
+            <button id="main-filter-toggle" class="filter-btn" title="Szűrők">⚙️</button>
+            
+            <div id="main-filter-panel" class="filter-panel hidden">
+                <select id="main-shop-filter" class="glass-select">
+                    <option value="">Minden Webshop</option>
+                    <option value="taiwangun">Taiwangun</option>
+                    <option value="gunfire">Gunfire</option>
+                    <option value="airsoftplaza">Airsoftplaza</option>
+                </select>
+                <select id="main-cat-filter" class="glass-select">
+                    <option value="">Minden Kategória</option>
+                    <option value="rifle">Karabély (Rifle)</option>
+                    <option value="pistol">Pisztoly</option>
+                    <option value="sniper">Mesterlövész</option>
+                    <option value="shotgun">Shotgun</option>
+                    <option value="gear">Felszerelés</option>
+                    <option value="gas">Gáz / Akku</option>
+                </select>
+            </div>
         </div>
 
         <button id="mobile-menu-toggle" class="mobile-only theme-icon">☰</button>
@@ -59,9 +98,6 @@
             <a href="#kezdo-sec">Kezdőknek</a>
             <a href="#pisztoly-sec">Pisztolyok</a>
             <a href="#karabely-sec">Karabélyok</a>
-            <a href="#aap01-sec">AAP-01</a>
-            <a href="#taktikai-sec">Taktikai</a>
-            <a href="#kiegeszito-sec">Kiegészítők</a>
         </div>
 
         <div class="nav-icons">
@@ -73,7 +109,7 @@
     <div class="container">
         <header class="hero-section">
             <h1>A Felszerelésed Itt Kezdődik</h1>
-            <p>Valós idejű válogatás a legnagyobb európai webáruházakból.<br>Taiwangun, Gunfire, Airsoftplaza és sok más egy helyen.</p>
+            <p>Valós idejű válogatás a legnagyobb európai webáruházakból.</p>
         </header>
 
         <main>
@@ -81,48 +117,10 @@
                 <h2>🔎 Keresési Találatok</h2>
                 <div class="product-grid" id="search-results-container"></div>
             </section>
-
-            <section id="akcios-sec" class="category-section">
-                <h2>🔥 Éppen Akciós Termékek</h2>
-                <div class="coming-soon">
-                    <h3>Coming soon...</h3>
-                    <p>Hamarosan itt találod a legnagyobb leárazásokat!</p>
-                </div>
-            </section>
-
+            
             <section id="legnepszerubb-sec" class="category-section">
                 <h2>⭐ Legnépszerűbb Termékek</h2>
                 <div class="product-grid" id="legnepszerubb-container"></div>
-            </section>
-
-            <section id="kezdo-sec" class="category-section">
-                <h2>🎯 Kezdő Fegyverek</h2>
-                <div class="product-grid" id="kezdo-container"></div>
-            </section>
-            
-            <section id="pisztoly-sec" class="category-section">
-                <h2>🔫 Pisztolyok</h2>
-                <div class="product-grid" id="pisztoly-container"></div>
-            </section>
-
-            <section id="karabely-sec" class="category-section">
-                <h2>⚔️ Karabélyok</h2>
-                <div class="product-grid" id="karabely-container"></div>
-            </section>
-
-            <section id="aap01-sec" class="category-section">
-                <h2>🛠️ AAP-01 és Alkatrészek</h2>
-                <div class="product-grid" id="aap01-container"></div>
-            </section>
-
-            <section id="taktikai-sec" class="category-section">
-                <h2>🪖 Taktikai Felszerelés</h2>
-                <div class="product-grid" id="taktikai-container"></div>
-            </section>
-
-            <section id="kiegeszito-sec" class="category-section">
-                <h2>🔦 Kiegészítők</h2>
-                <div class="product-grid" id="kiegeszito-container"></div>
             </section>
         </main>
     </div>
