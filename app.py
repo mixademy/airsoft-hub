@@ -1,34 +1,25 @@
 import os
 import json
 import urllib.parse
-import requests
+import cloudscraper
 from bs4 import BeautifulSoup
 from flask import Flask, jsonify, request
 import concurrent.futures
 
-# Cseréld le erre, ha a scraper.py-t használod a napi frissítéshez
-# from scraper import run_scraper
-
 app = Flask(__name__, static_folder='static', static_url_path='')
 
-# Álcázott fejléc, hogy ne kapjunk azonnal bot-tiltást
-HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-    "Accept-Language": "hu-HU,hu;q=0.9,en-US;q=0.8,en;q=0.7",
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8"
-}
+# Cloudflare védelmet kijátszó böngésző szimulátor létrehozása
+scraper = cloudscraper.create_scraper(
+    browser={
+        'browser': 'chrome',
+        'platform': 'windows',
+        'desktop': True
+    }
+)
 
 @app.route('/')
 def index():
     return app.send_static_file('index.html')
-
-@app.route('/api/products')
-def get_products():
-    try:
-        with open('products.json', 'r', encoding='utf-8') as f:
-            return jsonify(json.load(f))
-    except FileNotFoundError:
-        return jsonify({})
 
 # --- WEBÁRUHÁZ SPECIFIKUS KERESŐ FÜGGVÉNYEK ---
 
@@ -36,7 +27,7 @@ def search_airsoftplaza(query):
     results = []
     try:
         url = f"https://airsoftplaza.hu/?s={urllib.parse.quote_plus(query)}&post_type=product"
-        resp = requests.get(url, headers=HEADERS, timeout=5)
+        resp = scraper.get(url, timeout=10)
         soup = BeautifulSoup(resp.text, 'html.parser')
         
         for item in soup.find_all('li', class_='product')[:4]:
@@ -60,7 +51,7 @@ def search_airsoftguru(query):
     results = []
     try:
         url = f"https://airsoftguru.hu/kereses?controller=search&s={urllib.parse.quote_plus(query)}"
-        resp = requests.get(url, headers=HEADERS, timeout=5)
+        resp = scraper.get(url, timeout=10)
         soup = BeautifulSoup(resp.text, 'html.parser')
         
         for item in soup.find_all('article', class_='product-miniature')[:4]:
@@ -84,7 +75,7 @@ def search_catus(query):
     results = []
     try:
         url = f"https://catus.hu/kereses?search={urllib.parse.quote_plus(query)}"
-        resp = requests.get(url, headers=HEADERS, timeout=5)
+        resp = scraper.get(url, timeout=10)
         soup = BeautifulSoup(resp.text, 'html.parser')
         
         for item in soup.find_all('div', class_='product-box')[:4]:
@@ -93,7 +84,6 @@ def search_catus(query):
             img = item.find('img', class_='img-fluid')
             
             if title:
-                # A Catus relatív linkeket használ, ki kell egészíteni
                 link_href = title['href']
                 if not link_href.startswith('http'):
                     link_href = f"https://catus.hu{link_href}"
@@ -112,13 +102,7 @@ def search_taiwangun(query):
     results = []
     try:
         url = f"https://www.taiwangun.com/hu/search?s={urllib.parse.quote_plus(query)}"
-        resp = requests.get(url, headers=HEADERS, timeout=5)
-        
-        # Ha 403-at kapunk, a Cloudflare megfogta a kérést
-        if resp.status_code == 403:
-            print("Taiwangun Cloudflare blokkolas!")
-            return results
-            
+        resp = scraper.get(url, timeout=10)
         soup = BeautifulSoup(resp.text, 'html.parser')
         
         for item in soup.find_all('div', class_='product-card')[:4]:
@@ -142,7 +126,7 @@ def search_anareus(query):
     results = []
     try:
         url = f"https://www.anareus.cz/gb/search?s={urllib.parse.quote_plus(query)}"
-        resp = requests.get(url, headers=HEADERS, timeout=5)
+        resp = scraper.get(url, timeout=10)
         soup = BeautifulSoup(resp.text, 'html.parser')
         
         for item in soup.find_all('article', class_='product-miniature')[:4]:
@@ -171,8 +155,6 @@ def live_search():
         return jsonify([])
 
     all_results = []
-    
-    # A funkciók listája (Szűrés esetén csak a megfelelőt futtatjuk)
     search_tasks = []
     
     if not shop_filter or shop_filter == "airsoftplaza":
@@ -186,9 +168,8 @@ def live_search():
     if not shop_filter or shop_filter == "anareus":
         search_tasks.append(search_anareus)
 
-    # Párhuzamosított futtatás (Többszálúság) a gyorsaság érdekében
+    # 5 szálon indítjuk a keresést egyszerre, maximum 10 másodpercet várva
     with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
-        # Elindítjuk az összes szükséges keresőt egyszerre
         future_to_shop = {executor.submit(task, query): task for task in search_tasks}
         
         for future in concurrent.futures.as_completed(future_to_shop):
@@ -196,10 +177,11 @@ def live_search():
                 shop_results = future.result()
                 all_results.extend(shop_results)
             except Exception as e:
-                print(f"Hiba egy szálban: {e}")
+                print(f"Hiba az egyik webshopnal: {e}")
 
     return jsonify(all_results)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
+    # Ne felejtsd el újraindítani a szervert (Ctrl+C, majd python app.py)
     app.run(host='0.0.0.0', port=port, debug=True)
