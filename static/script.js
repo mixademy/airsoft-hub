@@ -57,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initBuilder();
 });
 
-// --- Mobil Menü ---
 function initMobileMenu() {
     const toggleBtn = document.getElementById('mobile-menu-toggle');
     const navLinks = document.getElementById('nav-links');
@@ -66,7 +65,6 @@ function initMobileMenu() {
         navLinks.classList.toggle('active');
     });
 
-    // Ha rákattint egy linkre mobil nézetben, csukja be a menüt
     navLinks.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             navLinks.classList.remove('active');
@@ -160,24 +158,23 @@ function renderProductGrid(containerId, products) {
 }
 
 
-// --- Felszerelés Építő (Loadout Builder) Logika ---
+// --- 4. Felszerelés Építő (Több elemes logika + Kereső) ---
 let loadout = {
-    primary: null,
-    secondary: null,
-    accessory: null,
-    protection: null,
-    tactical: null,
-    consumable: null
+    primary: null,      // Csak 1 fegyver (Karabély)
+    secondary: null,    // Csak 1 fegyver (Pisztoly)
+    accessory: [],      // Korlátlan kiegészítő
+    protection: [],     // Korlátlan védőfelszerelés
+    tactical: [],       // Korlátlan ruházat
+    consumable: []      // Korlátlan fogyóeszköz
 };
 
-// Builder Kategóriák konfigurációja
 const builderConfig = [
-    { id: 'primary', label: 'Elsődleges Fegyver', icon: '🎯', dataKeys: ['kezdo', 'karabely'] },
-    { id: 'secondary', label: 'Másodlagos Fegyver', icon: '🔫', dataKeys: ['pisztoly', 'aap01'] },
-    { id: 'accessory', label: 'Kiegészítők (Optika, Tracer)', icon: '🔦', dataKeys: ['kiegeszito'] },
-    { id: 'protection', label: 'Védőfelszerelés (Maszk, Szemüveg)', icon: '🥽', dataKeys: ['taktikai'] },
-    { id: 'tactical', label: 'Taktikai Ruházat', icon: '🪖', dataKeys: ['taktikai'] },
-    { id: 'consumable', label: 'Fogyóeszközök (Gáz, BB, Akku)', icon: '🔋', dataKeys: ['legnepszerubb'] }
+    { id: 'primary', label: 'Elsődleges Fegyver', icon: '🎯', dataKeys: ['karabely'], multi: false },
+    { id: 'secondary', label: 'Másodlagos Fegyver', icon: '🔫', dataKeys: ['pisztoly'], multi: false },
+    { id: 'accessory', label: 'Kiegészítők (Optika, Tracer)', icon: '🔦', dataKeys: ['kiegeszito', 'aap01'], multi: true },
+    { id: 'protection', label: 'Védőfelszerelés (Maszk, Szemüveg)', icon: '🥽', dataKeys: ['taktikai'], multi: true },
+    { id: 'tactical', label: 'Taktikai Ruházat', icon: '🪖', dataKeys: ['taktikai'], multi: true },
+    { id: 'consumable', label: 'Fogyóeszközök (Gáz, BB, Akku)', icon: '🔋', dataKeys: ['legnepszerubb'], multi: true }
 ];
 
 function initBuilder() {
@@ -187,6 +184,7 @@ function initBuilder() {
     
     const pickerModal = document.getElementById('picker-modal');
     const closePickerBtn = document.getElementById('close-picker');
+    const pickerSearch = document.getElementById('picker-search-input');
 
     builderBtn.addEventListener('click', () => {
         renderBuilderList();
@@ -195,49 +193,59 @@ function initBuilder() {
 
     closeBuilderBtn.addEventListener('click', () => builderModal.classList.add('hidden'));
     closePickerBtn.addEventListener('click', () => pickerModal.classList.add('hidden'));
+
+    // Belső keresőmotor a termékválasztóhoz
+    pickerSearch.addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase();
+        const filtered = window.currentPickerItems.filter(p => 
+            p.name.toLowerCase().includes(term) || 
+            p.shop.toLowerCase().includes(term)
+        );
+        renderPickerGrid(filtered, window.currentCategoryId);
+    });
 }
 
-// Generálja az OC Racing stílusú listát
 function renderBuilderList() {
     const listContainer = document.querySelector('.builder-list');
     
     listContainer.innerHTML = builderConfig.map(cat => {
-        const item = loadout[cat.id];
+        const isMulti = cat.multi;
+        const items = isMulti ? loadout[cat.id] : (loadout[cat.id] ? [loadout[cat.id]] : []);
         
-        if (item) {
-            // Ha már van kiválasztva valami
-            const safeName = item.name.replace(/'/g, "\\'");
-            return `
-            <div class="builder-row">
-                <div class="builder-row-left">
-                    <span class="builder-icon">${cat.icon}</span>
-                    <span class="builder-label">${cat.label}</span>
+        let html = `
+        <div class="builder-row" style="${isMulti && items.length > 0 ? 'align-items: flex-start;' : ''}">
+            <div class="builder-row-left">
+                <span class="builder-icon">${cat.icon}</span>
+                <span class="builder-label">${cat.label}</span>
+            </div>
+            <div class="builder-row-middle" style="flex-direction: column; gap: 0.5rem; align-items: center; width: 100%;">`;
+
+        // Kiválasztott elemek listázása
+        items.forEach((item, idx) => {
+            html += `
+            <div class="selected-item" style="width: 100%;">
+                <img src="${item.image}" alt="Kép">
+                <div class="selected-info">
+                    <h4>${item.name}</h4>
+                    <span>${item.price}</span>
                 </div>
-                <div class="selected-item">
-                    <img src="${item.image}" alt="Kép">
-                    <div class="selected-info">
-                        <h4>${item.name}</h4>
-                        <span>${item.price}</span>
-                    </div>
-                    <button class="remove-btn" onclick="removeFromLoadout('${cat.id}')">X</button>
-                </div>
+                <button class="remove-btn" onclick="removeFromLoadout('${cat.id}', ${idx})">X</button>
             </div>`;
-        } else {
-            // Ha még üres a hely
-            return `
-            <div class="builder-row">
-                <div class="builder-row-left">
-                    <span class="builder-icon">${cat.icon}</span>
-                    <span class="builder-label">${cat.label}</span>
-                </div>
-                <div class="builder-row-middle">
-                    <button class="choose-btn" onclick="openPicker('${cat.id}')">+ Choose ${cat.label.split(' ')[0]}</button>
-                </div>
-                <div class="builder-row-right">
-                    <span>—</span>
-                </div>
-            </div>`;
+        });
+
+        // "+ Választás" gomb generálása
+        // Ha multi kategória, mindig megjelenik, ha sima, csak akkor, ha még üres
+        if (isMulti || items.length === 0) {
+            html += `<button class="choose-btn" style="margin-top: ${items.length > 0 ? '0.5rem' : '0'};" onclick="openPicker('${cat.id}')">+ Választás</button>`;
         }
+
+        html += `
+            </div>
+            <div class="builder-row-right">
+                <span>—</span>
+            </div>
+        </div>`;
+        return html;
     }).join('');
 }
 
@@ -245,9 +253,10 @@ window.openPicker = function(categoryId) {
     const category = builderConfig.find(c => c.id === categoryId);
     if (!category) return;
 
+    window.currentCategoryId = categoryId;
     document.getElementById('picker-title').innerText = `Válassz: ${category.label}`;
     
-    // Összegyűjtjük a kategóriához tartozó termékeket az adatbázisból
+    // A megadott adatkulcsokból kigyűjtjük a választható termékeket
     let availableItems = [];
     category.dataKeys.forEach(key => {
         if (staticData[key]) {
@@ -255,34 +264,57 @@ window.openPicker = function(categoryId) {
         }
     });
 
+    window.currentPickerItems = availableItems;
+    
+    // Alaphelyzetbe állítjuk a keresőt
+    document.getElementById('picker-search-input').value = '';
+    renderPickerGrid(availableItems, categoryId);
+
+    document.getElementById('picker-modal').classList.remove('hidden');
+}
+
+function renderPickerGrid(items, categoryId) {
     const grid = document.getElementById('picker-grid');
-    grid.innerHTML = availableItems.map((item, index) => {
-        // Átadunk mindent az onclick függvénynek escapelve
-        const itemJson = JSON.stringify(item).replace(/"/g, '&quot;');
+    
+    if (items.length === 0) {
+        grid.innerHTML = '<p style="color:var(--text-muted); grid-column: 1/-1;">Nincs találat ebben a kategóriában.</p>';
+        return;
+    }
+
+    grid.innerHTML = items.map((item) => {
+        // Az eredeti listabeli index kell a kiválasztáshoz
+        const origIndex = window.currentPickerItems.indexOf(item);
         return `
-        <div class="picker-card" onclick="selectForLoadout('${categoryId}', ${index})">
+        <div class="picker-card" onclick="selectForLoadout('${categoryId}', ${origIndex})">
             <img src="${item.image}" alt="${item.name}" onerror="this.src='https://placehold.co/300x200?text=Nincs+Kep'">
             <h4>${item.name}</h4>
             <span style="color:var(--accent); font-weight:bold;">${item.price}</span>
         </div>`;
     }).join('');
-
-    // Eltároljuk egy globális változóban az épp megnyitott listát a könnyű kiválasztásért
-    window.currentPickerItems = availableItems;
-
-    document.getElementById('picker-modal').classList.remove('hidden');
 }
 
 window.selectForLoadout = function(categoryId, itemIndex) {
     const item = window.currentPickerItems[itemIndex];
-    if (item) {
-        loadout[categoryId] = item;
+    const category = builderConfig.find(c => c.id === categoryId);
+    
+    if (item && category) {
+        if (category.multi) {
+            loadout[categoryId].push(item);
+        } else {
+            loadout[categoryId] = item;
+        }
         document.getElementById('picker-modal').classList.add('hidden');
         renderBuilderList();
     }
 }
 
-window.removeFromLoadout = function(categoryId) {
-    loadout[categoryId] = null;
+window.removeFromLoadout = function(categoryId, index) {
+    const category = builderConfig.find(c => c.id === categoryId);
+    
+    if (category.multi) {
+        loadout[categoryId].splice(index, 1);
+    } else {
+        loadout[categoryId] = null;
+    }
     renderBuilderList();
 }
