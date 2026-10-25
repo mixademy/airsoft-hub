@@ -11,31 +11,19 @@
     <div class="blob blob-2"></div>
     <div class="blob blob-3"></div>
 
-    <div id="auth-modal" class="modal-overlay hidden">
-        <div class="modal-content glass-card">
-            <button id="close-modal" class="close-btn">✖</button>
-            <h2>Bejelentkezés</h2>
-            <p>Jelentkezz be a termékek mentéséhez!</p>
-            <input type="text" id="username-input" placeholder="Felhasználónév" class="auth-input">
-            <button id="login-submit" class="btn btn-large" style="width:100%; margin-top:1rem;">Belépés / Regisztráció</button>
-        </div>
-    </div>
-
     <nav class="main-nav">
         <div class="nav-logo">AIRSOFT<span>HUB</span></div>
         
         <div class="search-bar">
-            <input type="text" id="search-input" placeholder="Keresés a webshopokban (pl. Glock, AAP)...">
+            <input type="text" id="search-input" placeholder="Élő keresés a webshopokban (pl. Glock, AAP)...">
         </div>
 
         <div class="nav-links">
             <a href="#akcios-sec">Akciók</a>
             <a href="#legnepszerubb-sec">Legnépszerűbb</a>
             <a href="#kezdo-sec">Kezdőknek</a>
-            
-            <button id="auth-btn" class="btn outline-btn">Bejelentkezés</button>
-            <span id="user-greeting" class="hidden" style="font-weight:bold; color:var(--accent);"></span>
-            <button id="logout-btn" class="btn outline-btn hidden">Kilépés</button>
+            <a href="#pisztoly-sec">Pisztolyok</a>
+            <a href="#karabely-sec">Karabélyok</a>
             <button id="theme-toggle" class="theme-icon">☀️</button>
         </div>
     </nav>
@@ -50,11 +38,6 @@
             <section id="search-results-sec" class="category-section hidden">
                 <h2>🔎 Keresési Találatok</h2>
                 <div class="product-grid" id="search-results-container"></div>
-            </section>
-
-            <section id="saved-sec" class="category-section hidden">
-                <h2>❤️ Mentett Termékeim</h2>
-                <div class="product-grid" id="saved-container"></div>
             </section>
 
             <section id="akcios-sec" class="category-section">
