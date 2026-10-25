@@ -61,7 +61,7 @@
     <!-- Fő Navigáció -->
     <nav class="main-nav">
         <div class="nav-logo" style="display: flex; align-items: center; gap: 0.5rem;">
-            <img src="img/logo.svg" alt="Logo" style="width: 30px; height: 30px; display: none;" onerror="this.style.display='none'">
+            <img src="img/logo.svg" alt="Logo" style="width: 30px; height: 30px;" onerror="this.style.display='none'">
             AIRSOFT<span>HUB</span>
         </div>
         
@@ -98,6 +98,9 @@
             <a href="#kezdo-sec">Kezdőknek</a>
             <a href="#pisztoly-sec">Pisztolyok</a>
             <a href="#karabely-sec">Karabélyok</a>
+            <a href="#aap01-sec">AAP-01</a>
+            <a href="#taktikai-sec">Taktikai</a>
+            <a href="#kiegeszito-sec">Kiegészítők</a>
         </div>
 
         <div class="nav-icons">
@@ -117,10 +120,48 @@
                 <h2>🔎 Keresési Találatok</h2>
                 <div class="product-grid" id="search-results-container"></div>
             </section>
-            
+
+            <section id="akcios-sec" class="category-section">
+                <h2>🔥 Éppen Akciós Termékek</h2>
+                <div class="coming-soon">
+                    <h3>Coming soon...</h3>
+                    <p>Hamarosan itt találod a legnagyobb leárazásokat!</p>
+                </div>
+            </section>
+
             <section id="legnepszerubb-sec" class="category-section">
                 <h2>⭐ Legnépszerűbb Termékek</h2>
                 <div class="product-grid" id="legnepszerubb-container"></div>
+            </section>
+
+            <section id="kezdo-sec" class="category-section">
+                <h2>🎯 Kezdő Fegyverek</h2>
+                <div class="product-grid" id="kezdo-container"></div>
+            </section>
+            
+            <section id="pisztoly-sec" class="category-section">
+                <h2>🔫 Pisztolyok</h2>
+                <div class="product-grid" id="pisztoly-container"></div>
+            </section>
+
+            <section id="karabely-sec" class="category-section">
+                <h2>⚔️ Karabélyok</h2>
+                <div class="product-grid" id="karabely-container"></div>
+            </section>
+
+            <section id="aap01-sec" class="category-section">
+                <h2>🛠️ AAP-01 és Alkatrészek</h2>
+                <div class="product-grid" id="aap01-container"></div>
+            </section>
+
+            <section id="taktikai-sec" class="category-section">
+                <h2>🪖 Taktikai Felszerelés</h2>
+                <div class="product-grid" id="taktikai-container"></div>
+            </section>
+
+            <section id="kiegeszito-sec" class="category-section">
+                <h2>🔦 Kiegészítők</h2>
+                <div class="product-grid" id="kiegeszito-container"></div>
             </section>
         </main>
     </div>
