@@ -362,3 +362,95 @@ body.light-mode .search-bar input {
     font-size: 1.1rem;
     font-weight: 500;
 }
+
+/* --- Tökéletesített, szellős navigáció --- */
+.main-nav { 
+    position: sticky; 
+    top: 1.5rem; 
+    max-width: 1350px; 
+    margin: 0 auto; 
+    background: var(--nav-bg); 
+    backdrop-filter: blur(16px); 
+    border: 1px solid var(--glass-border); 
+    border-radius: 16px; 
+    padding: 0.9rem 2rem; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    z-index: 100; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25); 
+}
+
+.nav-logo { 
+    font-size: 1.25rem; 
+    font-weight: 800; 
+    letter-spacing: 1px; 
+    color: var(--accent); 
+    white-space: nowrap; 
+}
+.nav-logo span { color: var(--text-muted); }
+
+/* Elegáns, keretezett keresősáv ikonnal */
+.search-bar { 
+    position: relative;
+    width: 260px; 
+    margin: 0 1.5rem; 
+}
+
+.search-bar input { 
+    width: 100%; 
+    padding: 0.55rem 1rem 0.55rem 2.4rem; /* Hely az ikonnak bal oldalon */
+    border-radius: 25px; 
+    border: 1px solid var(--glass-border); 
+    background: rgba(255, 255, 255, 0.07); 
+    color: var(--text-main); 
+    outline: none; 
+    font-size: 0.85rem; 
+    transition: all 0.3s ease; 
+}
+
+/* Keresés ikon a mező belsejében */
+.search-bar::before {
+    content: "🔍";
+    position: absolute;
+    left: 0.8rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8rem;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+body.light-mode .search-bar input { background: rgba(0, 0, 0, 0.04); }
+.search-bar input:focus { 
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15); 
+    background: var(--card-bg); 
+}
+
+.nav-links { 
+    display: flex; 
+    gap: 1.2rem; 
+    align-items: center; 
+}
+.nav-links a { 
+    color: var(--text-main); 
+    text-decoration: none; 
+    font-size: 0.85rem; 
+    font-weight: 600; 
+    transition: color 0.2s; 
+    white-space: nowrap; 
+}
+.nav-links a:hover { color: var(--accent); }
+
+.theme-icon { 
+    background: none; 
+    border: none; 
+    cursor: pointer; 
+    font-size: 1.2rem; 
+    color: var(--text-main); 
+    padding-left: 1rem; 
+    border-left: 1px solid var(--glass-border); 
+    transition: transform 0.2s;
+}
+.theme-icon:hover { transform: scale(1.1); }
