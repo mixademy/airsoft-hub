@@ -9,6 +9,8 @@
     --accent: #3b82f6;
     --accent-hover: #2563eb;
     --danger: #ef4444;
+    --scrollbar-bg: rgba(255, 255, 255, 0.1);
+    --scrollbar-thumb: rgba(255, 255, 255, 0.3);
 }
 
 body.light-mode {
@@ -19,6 +21,26 @@ body.light-mode {
     --hero-bg: rgba(255, 255, 255, 0.6);
     --card-bg: rgba(255, 255, 255, 0.8);
     --glass-border: rgba(0, 0, 0, 0.1);
+    --scrollbar-bg: rgba(0, 0, 0, 0.05);
+    --scrollbar-thumb: rgba(0, 0, 0, 0.2);
+}
+
+/* --- Egyedi, dizájnos görgetősáv (Scrollbar) --- */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
 }
 
 * {
@@ -87,16 +109,17 @@ body {
     }
 }
 
+/* Navigáció és Kereső */
 .main-nav {
     position: sticky;
     top: 1.5rem;
-    max-width: 1200px;
+    max-width: 1350px;
     margin: 0 auto;
     background: var(--nav-bg);
     backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
     border-radius: 12px;
-    padding: 1rem 2rem;
+    padding: 0.8rem 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -105,60 +128,32 @@ body {
 }
 
 .nav-logo {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     font-weight: 800;
     letter-spacing: 1px;
     color: var(--accent);
+    white-space: nowrap;
 }
 
 .nav-logo span {
     color: var(--text-muted);
 }
 
-.nav-links {
-    display: flex;
-    gap: 1.2rem;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.nav-links a {
-    color: var(--text-main);
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 600;
-    transition: color 0.2s;
-}
-
-.nav-links a:hover {
-    color: var(--accent);
-}
-
-.theme-icon {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.2rem;
-    color: var(--text-main);
-    padding-left: 1rem;
-    border-left: 1px solid var(--glass-border);
-}
-
+/* Keskenyebb keresősáv, hogy minden kategória kiférjen */
 .search-bar {
-    flex-grow: 1;
-    max-width: 400px;
-    margin: 0 2rem;
+    width: 220px;
+    margin: 0 1rem;
 }
 
 .search-bar input {
     width: 100%;
-    padding: 0.6rem 1rem;
+    padding: 0.5rem 0.9rem;
     border-radius: 20px;
     border: 1px solid var(--glass-border);
     background: rgba(255, 255, 255, 0.1);
     color: var(--text-main);
     outline: none;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     transition: box-shadow 0.3s, background 0.3s;
 }
 
@@ -169,6 +164,35 @@ body.light-mode .search-bar input {
 .search-bar input:focus {
     box-shadow: 0 0 0 2px var(--accent);
     background: var(--card-bg);
+}
+
+.nav-links {
+    display: flex;
+    gap: 0.9rem;
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: color 0.2s;
+    white-space: nowrap;
+}
+
+.nav-links a:hover {
+    color: var(--accent);
+}
+
+.theme-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: var(--text-main);
+    padding-left: 0.8rem;
+    border-left: 1px solid var(--glass-border);
 }
 
 .container {
